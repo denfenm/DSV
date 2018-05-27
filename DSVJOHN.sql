@@ -373,49 +373,13 @@ value
 
 insert into Ref_Booking_Outcomes
 value
-(201, 'approved'),
-(202, 'approved'),
-(203, 'approved'),
-(204, 'approved'),
-(205, 'approved'),
-(206, 'approved'),
-(207, 'approved'),
-(208, 'approved'),
-(209, 'approved'),
-(210, 'approved'),
-(211, 'pending'),
-(212, 'pending'),
-(213, 'pending'),
-(214, 'pending'),
-(215, 'pending'),
-(216, 'pending'),
-(217, 'pending'),
-(218, 'pending'),
-(219, 'pending'),
-(220, 'pending');
+(201, 'Paid'),
+(202, 'Pending');
 
 insert into Ref_Booking_Status
 value
-(101, 'paid'),
-(102, 'paid'),
-(103, 'paid'),
-(104, 'paid'),
-(105, 'paid'),
-(106, 'paid'),
-(107, 'paid'),
-(108, 'paid'),
-(109, 'paid'),
-(110, 'paid'),
-(111, 'cancelled'),
-(112, 'cancelled'),
-(113, 'cancelled'),
-(114, 'cancelled'),
-(115, 'cancelled'),
-(116, 'cancelled'),
-(117, 'cancelled'),
-(118, 'cancelled'),
-(119, 'cancelled'),
-(120, 'cancelled');
+(101, 'Approved'),
+(102, 'Cancelled');
 
 insert into Bookings
 value
@@ -641,40 +605,40 @@ value
 (10, 5008, '2018/2/4', 'pending', 'cancelled'),
 (10, 5009, '2018/2/4', 'pending', 'cancelled'),
 (10, 5010, '2018/2/4', 'pending', 'cancelled'),
-(10, 5011, '2018/2/4', 'approved', 'paid'),
-(10, 5012, '2018/2/4', 'approved', 'paid'),
-(10, 5013, '2018/2/4', 'approved', 'paid'),
-(10, 5014, '2018/2/4', 'approved', 'paid'),
-(10, 5015, '2018/2/4', 'approved', 'paid'),
-(10, 5016, '2018/2/4', 'approved', 'paid'),
-(10, 5017, '2018/2/4', 'approved', 'paid'),
-(10, 5018, '2018/2/4', 'approved', 'paid'),
-(10, 5019, '2018/2/4', 'approved', 'paid'),
-(10, 5020, '2018/2/4', 'approved', 'paid');
+(10, 5011, '2018/2/4', 'pending', 'cancelled'),
+(10, 5012, '2018/2/4', 'pending', 'cancelled'),
+(10, 5013, '2018/2/4', 'pending', 'cancelled'),
+(10, 5014, '2018/2/4', 'pending', 'cancelled'),
+(10, 5015, '2018/2/4', 'pending', 'cancelled'),
+(10, 5016, '2018/2/4', 'pending', 'cancelled'),
+(10, 5017, '2018/2/4', 'pending', 'cancelled'),
+(10, 5018, '2018/2/4', 'pending', 'cancelled'),
+(10, 5019, '2018/2/4', 'pending', 'cancelled'),
+(10, 5020, '2018/2/4', 'pending', 'cancelled');
 
 insert into Profit
 value
-(300, '2018/2/4', 'approved', 'paid'),
-(301, '2018/2/4', 'approved', 'paid'),
-(302, '2018/2/4', 'approved', 'paid'),
-(303, '2018/2/4', 'approved', 'paid'),
-(304, '2018/2/4', 'approved', 'paid'),
-(305, '2018/2/4', 'approved', 'paid'),
-(306, '2018/2/4', 'approved', 'paid'),
-(307, '2018/2/4', 'approved', 'paid'),
-(308, '2018/2/4', 'approved', 'paid'),
-(309, '2018/2/4', 'approved', 'paid'),
-(310, '2018/2/4', 'approved', 'paid'),
-(311, '2018/2/4', 'approved', 'paid'),
-(312, '2018/2/4', 'approved', 'paid'),
-(313, '2018/2/4', 'approved', 'paid'),
-(314, '2018/2/4', 'approved', 'paid'),
-(315, '2018/2/4', 'approved', 'paid'),
-(316, '2018/2/4', 'approved', 'paid'),
-(317, '2018/2/4', 'approved', 'paid'),
-(318, '2018/2/4', 'approved', 'paid'),
-(319, '2018/2/4', 'approved', 'paid'),
-(320, '2018/2/4', 'approved', 'paid');
+(300, '2018/2/4', 'paid', 'approved'),
+(301, '2018/2/4', 'paid', 'approved'),
+(302, '2018/2/4', 'paid', 'approved'),
+(303, '2018/2/4', 'paid', 'approved'),
+(304, '2018/2/4', 'paid', 'approved'),
+(305, '2018/2/4', 'paid', 'approved'),
+(306, '2018/2/4', 'paid', 'approved'),
+(307, '2018/2/4', 'paid', 'approved'),
+(308, '2018/2/4', 'paid', 'approved'),
+(309, '2018/2/4', 'paid', 'approved'),
+(310, '2018/2/4', 'paid', 'approved'),
+(311, '2018/2/4', 'paid', 'approved'),
+(312, '2018/2/4', 'paid', 'approved'),
+(313, '2018/2/4', 'paid', 'approved'),
+(314, '2018/2/4', 'paid', 'approved'),
+(315, '2018/2/4', 'paid', 'approved'),
+(316, '2018/2/4', 'paid', 'approved'),
+(317, '2018/2/4', 'paid', 'approved'),
+(318, '2018/2/4', 'paid', 'approved'),
+(319, '2018/2/4', 'paid', 'approved'),
+(320, '2018/2/4', 'paid', 'approved');
 
 
 
