@@ -1,3 +1,211 @@
+drop database if exists dsv;
+create database dsv;
+use dsv;
+
+create table Travel_Agencies(
+travel_agency_id int(20) primary key,
+travel_agency_details text  
+);
+
+create table Customers(
+customer_id int(20),
+customer_name varchar(30), -- improvement
+-- customer_address_id int,
+-- customer_contact_id int,
+primary key (customer_id)
+-- foreign key (customer_address_id) references Customers_Addresses(customer_address_id),
+-- foreign key (customer_contact_id) references Customers_Contact(customer_contact_id)
+);
+
+create table Customers_Addresses(
+address_id int(20),
+customer_houseno int,
+customer_street varchar(30),
+customer_city varchar(30),
+customer_zipcode int,
+customer_country varchar(30),
+customer_id int,
+foreign key  (customer_id) references Customers(customer_id));
+
+/* create table Customers_Addresses(
+customer_address_id int,
+customer_id int,
+address_id int,
+date_from date,
+date_to date,
+primary key (customer_address_id),
+foreign key (customer_id) references Customers(customer_id),
+foreign key (address_id) references Addresses(address_id));
+*/
+
+create table Contacts(
+contact_id int(20) primary key,
+customer_id int(20),
+customer_contactnumber varchar(30),
+customer_contactnumber2 varchar(30),
+customer_officenumber varchar(30),
+foreign key (customer_id) references Customers(customer_id)
+);
+
+create table Customers_Contact (
+customer_contact_id int(20),
+contact_id int(20),
+customer_id int(20),
+-- Imp date_from date,
+-- Imp date_to date,
+primary key (customer_contact_id),
+foreign key (customer_id) references Customers(customer_id),
+foreign key (contact_id) references Contacts(contact_id));
+
+create table Ref_Booking_Outcomes (
+outcome_code int(20) primary key,
+outcome_description text);
+
+create table Ref_Booking_Status (
+status_code int(20) primary key,
+status_description text);
+
+create table Bookings(
+booking_id int(20) primary key,
+customer_id int(20),
+outcome_code int(20),
+status_code int(50),
+travel_agency_id int(20),
+date_of_booking date,
+booking_details text,
+
+foreign key (customer_id) references Customers(customer_id),
+foreign key (outcome_code) references Ref_Booking_Outcomes(outcome_code),
+foreign key (status_code) references Ref_Booking_Status(status_code),
+foreign key (travel_agency_id) references Travel_Agencies(travel_agency_id)
+);
+
+create table Services(
+service_id int(20) unique primary key,
+service_details text
+);
+
+create table Service_Bookings(
+booking_id int(20),
+service_id int(20),
+booking_start_date date,
+booking_end_date date,
+other_details text,
+foreign key (booking_id) references Bookings(booking_id),
+foreign key (service_id) references Services(service_id)
+);
+
+create table Airlines(
+airline_id int(20),
+airline_details text,
+constraint airline_id foreign key (airline_id) references Services(service_id)
+);
+
+create table Cars(
+car_id int(20),
+car_details text,
+constraint car_id foreign key (car_id) references Services(service_id)
+);
+
+create table Hotels(
+hotel_id int(20),
+hotel_details text,
+constraint hotel_id foreign key (hotel_id) references Services(service_id)
+);
+
+create table Restaurants(
+restaurant_id int(20),
+restaurant_details text,
+constraint restaurant_id foreign key (restaurant_id) references Services(service_id)
+);
+
+
+create table Payments(
+payment_id int(20) primary key,
+booking_id int(20),
+payment_amount int(50),
+payment_date date,
+other_details text,
+
+foreign key (booking_id) references Bookings(booking_id)
+);
+
+create table Staff_Information(
+staff_id int primary key,
+staff_first_name varchar(30),
+staff_last_name varchar(30),
+staff_contact_number int(30),
+staff_position varchar(30),
+staff_address_details varchar(30),
+staff_salary int(30),
+
+foreign key (staff_salary) references Staff_salary(staff_salary));
+
+
+
+create table Sales_Staff(
+sales_first_date date,
+sales_end_date date,
+discount_rate int(20),
+customer_id int(20),
+staff_id int(20),
+payment_id int(20),
+booking_id int(20),
+
+foreign key (staff_id) references Staff_Information (staff_id),
+foreign key (payment_id) references Payments (payment_id),
+foreign key (booking_id) references Bookings (booking_id));
+
+ -- sales period remove because it moved to sales (sales_start_date & sales_end_date).
+/*create table Sales_Period(
+sales_period_id int primary key,
+sales_period_start_date date,
+sales_period_end_date date,
+discount_rate int,
+payment_id int,
+foreign key (payment_id) references Payments(payment_id)); 
+
+-- 
+create table Expenses(
+-- expenses_id int primary key,
+staff_salary int,
+house_expenses int,
+car_expenses int,
+airline_expenses int,
+hotel_expenses int,
+maintenance int,
+Years year,
+foreign key (staff_salary) references Staff_salary(staff_salary)); 
+*/
+/*select Years, (payment_amount - (staff_salary + house_expenses+ car_expenses + airline_expenses+ hotel_expenses+ maintenance))
+as Projections
+from Payments, Expenses;
+*/
+-- select  payment_id - TotalExpenses 
+-- as Projections
+--  from Payments, Expenses;
+create table Loss (
+discount_rate int(20),
+payment_amount int(20),
+payment_date date,
+outcome_code int(20),
+status_code int(20),
+foreign key (outcome_code) references booking_id (outcome_code),
+foreign key (status_code) references bookind_id (status_code),
+foreign key (discount_rate) references Staff_Sales (discount_rate),
+foreign key (payment_amount) references Payments (payment_amount),
+foreign key (payment_date) references Payments (payment_date));
+
+create table Profit (
+payment_amount int(50),
+payment_date date,
+outcome_code int(20),
+status_code int(20),
+foreign key (outcome_code) references booking_id (outcome_code),
+foreign key (status_code) references bookind_id (status_code),
+foreign key (payment_amount) references Payments (payment_amount),
+foreign key (payment_date) references Payments (payment_date));
+
 insert into Services 
 values
 (901, 'Airline1'),
@@ -24,26 +232,26 @@ values
 
 insert into Airlines 
 values 
-(801, 'Airlines1'),
-(802, 'Airlines2'),
-(803, 'Airlines3'),
-(804, 'Airlines4'),
-(805, 'Airlines5'),
-(806, 'Airlines6'),
-(807, 'Airlines7'),
-(808, 'Airlines8'),
-(809, 'Airlines9'),
-(810, 'Airlines10'),
-(811, 'Airlines11'),
-(812, 'Airlines12'),
-(813, 'Airlines13'),
-(814, 'Airlines14'),
-(815, 'Airlines15'),
-(816, 'Airlines16'),
-(817, 'Airlines17'),
-(818, 'Airlines18'),
-(819, 'Airlines19'),
-(820, 'Airlines20');
+(901, 'Airlines1'),
+(902, 'Airlines2'),
+(903, 'Airlines3'),
+(904, 'Airlines4'),
+(905, 'Airlines5'),
+(906, 'Airlines6'),
+(907, 'Airlines7'),
+(908, 'Airlines8'),
+(909, 'Airlines9'),
+(910, 'Airlines10'),
+(911, 'Airlines11'),
+(912, 'Airlines12'),
+(913, 'Airlines13'),
+(914, 'Airlines14'),
+(915, 'Airlines15'),
+(916, 'Airlines16'),
+(917, 'Airlines17'),
+(918, 'Airlines18'),
+(919, 'Airlines19'),
+(920, 'Airlines20');
 
 insert into Travel_agencies
 values
@@ -92,7 +300,7 @@ values
 (619, 'Leo'),
 (620, 'Bennedict');
 
-insert into Customer_Addresses
+insert into Customers_Addresses
 values
 (501, 20, 'Jalan Sampan', 'Selangor', 5340, 'Malaysia', 601),
 (502, 15, 'Jalan Impan', 'Selangor', 2340, 'Malaysia', 602),
@@ -396,6 +604,7 @@ value
 (8019, 'Ewon', 'Husk', 012534643, 'clerk', '9th street', 2000),
 (8020, 'Efon', 'Wusk', 012534643, 'clerk', '8th street', 2000);
 
+
 insert into Sales_Staff
 value
 ('2018/2/4','2018/3/8', 10, 601,8001,7001,1001),
@@ -466,3 +675,44 @@ value
 (318, '2018/2/4', 'approved', 'paid'),
 (319, '2018/2/4', 'approved', 'paid'),
 (320, '2018/2/4', 'approved', 'paid');
+
+
+
+
+select * 
+from Services;
+-- insert into 
+
+select distinct Loss,
+sum (payment_amount) 
+from Loss 
+as LossCancelled
+where outcome_code in (-- put where outcomecode=paid)
+and status_code in (-- put where outcomecode=cancelled)
+and discount_rate is null
+order by year (payment_date) asc;
+
+select distinct Loss,
+sum ((100-discountrate)/100)*(payment_amount) 
+from Loss 
+as LossDiscount
+where outcome_code in (-- put where outcomecode=paid)
+and status_code in (-- put where outcomecode=Approved)
+and discount_rate is not null
+order by year (payment_date) asc;
+
+select distinct Profit,
+sum (payment_amount) 
+from Profit
+as Income
+where outcome_code in (-- put where outcomecode=paid)
+and status_code in (-- put where outcomecode=Approved)
+order by year (payment_date) asc;
+
+create table Projections
+select (Income-(LossDiscount + LossCancelled)) as Revenue ,  year (payment_date)
+from Income , Loss;
+
+
+
+insert into Airlines  values  (801, 'Airlines1'), (802, 'Airlines2'), (802, 'Airlines2'), (802, 'Airlines2'), (802, 'Airlines2'), (802, 'Airlines2'), (802, 'Airlines2'),  insert into Travel_agencies values (701, 'lorem ipsum'), (702, 'jewish ipsum')
